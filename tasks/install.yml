@@ -51,10 +51,3 @@
     - '{{ minio_data_path }}'
   loop_control:
     loop_var: minio_dir
-
-- name: Allow minio console UI to run over HTTPS port (Set cap_net_bind_service=+epi on /opt/minio/bin/minio)
-  community.general.capabilities:
-    path: /opt/minio/bin/minio
-    capability: cap_net_bind_service=+epi
-    state: present
-  when: minio_ssl_enabled == 'true'

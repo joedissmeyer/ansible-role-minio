@@ -31,8 +31,6 @@
   group:
     name: minio-user
     state: present
-    group: minio-user
-
 
 - name: Create the minio user
   user:

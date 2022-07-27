@@ -23,7 +23,7 @@
   roles:
     - joedissmeyer.ansible-role-minio
   vars:
-    minio_access_key: minio
-    minio_secret_key: minio
+    minio_root_user: minio
+    minio_root_password: minio
     minio_package_version: "minio-20220726005303.0.0.x86_64.rpm"
     minio_client_version: "mcli-20220724022513.0.0.x86_64.rpm"

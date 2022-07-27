@@ -5,11 +5,11 @@
 # REQUIREMENTS:
 # - Install the required ansible roles. 
 #       $ ansible-galaxy install -r requirements.yml --force
-# - Sensitive credentials saved under an ansible vault protected yml in './vars'.
+# - Sensitive credentials should be saved under an ansible vault protected yml in './vars'.
 # 
 # RUNNING THIS PLAYBOOK:
 #  
-#  $ ansible-playbook -i ./hosts --private-key ~/.ssh/ansible-user -u ansible-user --ask-vault-password playbook_example.yml
+#  $ ansible-playbook -i ../disslab/hosts --private-key ~/.ssh/ansible-user -u ansible-user playbook_example.yml
 #
 # NOTES:
 #

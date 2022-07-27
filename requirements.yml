@@ -1,0 +1,4 @@
+---
+roles:
+- name: joedissmeyer.ansible-role-minio
+  src: https://github.com/joedissmeyer/ansible-role-minio.git

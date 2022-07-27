@@ -27,6 +27,19 @@
     dest: '/etc/default/minio'
     mode: 0644
 
+- name: Create the minio group
+  group:
+    name: minio-user
+    state: present
+    group: minio-user
+
+
+- name: Create the minio user
+  user:
+    name: minio-user
+    state: present
+    group: minio-user
+
 - name: Ensure that minio directories are created
   file:
     path: '{{ minio_dir }}'

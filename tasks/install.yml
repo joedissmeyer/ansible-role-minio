@@ -18,7 +18,7 @@
     immediate: yes
     state: enabled
   loop:
-    - "{{ minio_http_port }}/tcp"
+    - "{{ minio_server_port }}/tcp"
     - "{{ minio_console_port }}/tcp"
 
 - name: Copy minio configuration templates

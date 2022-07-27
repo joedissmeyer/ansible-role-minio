@@ -57,4 +57,4 @@
     path: /opt/minio/bin/minio
     capability: cap_net_bind_service=+epi
     state: present
-    when: minio_ssl_enabled == 'true'
+  when: minio_ssl_enabled == 'true'

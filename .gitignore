@@ -27,3 +27,13 @@ override.tf.json
 
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
+
+### Vagrant ###
+# General
+.vagrant/
+vagrant/.vagrant/
+vagrant.zip
+
+# MacOS stuff to ignore
+.DS_store
+files/.DS_store

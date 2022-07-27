@@ -1,0 +1,29 @@
+###########################################################
+## Playbook to install and set up Minio on a single host ##
+###########################################################
+#
+# REQUIREMENTS:
+# - Install the required ansible roles. 
+#       $ ansible-galaxy install -r requirements.yml --force
+# - Sensitive credentials saved under an ansible vault protected yml in './vars'.
+# 
+# RUNNING THIS PLAYBOOK:
+#  
+#  $ ansible-playbook -i ./hosts --private-key ~/.ssh/ansible-user -u ansible-user --ask-vault-password playbook_example.yml
+#
+# NOTES:
+#
+# Tested against Fedora Server 36.
+# 
+
+- name: Install Minio storage server
+  become: yes
+  gather_facts: yes
+  hosts: minio
+  roles:
+    - joedissmeyer.ansible-role-minio
+  vars:
+    minio_access_key: minio
+    minio_secret_key: minio
+    minio_package_version: "minio-20220726005303.0.0.x86_64.rpm"
+    minio_client_version: "mcli-20220724022513.0.0.x86_64.rpm"

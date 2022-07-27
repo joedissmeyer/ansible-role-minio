@@ -1,0 +1,44 @@
+---
+- name: Copy config files for setting up minio lifecycle policies
+  copy:
+    src: "{{ item }}"
+    dest: /opt/minio
+    owner: root
+    group: root
+    mode: '0775'
+  loop:
+    - test-bucket.json
+
+- name: minio cli - add local minio server to current terminal session
+  command: mc config host add myminio http://localhost:9000 "{{ S3_MINIO_ACCESS_KEY }}" "{{ S3_MINIO_SECRET_KEY }}"
+  ignore_errors: yes
+
+# Create buckets
+
+- name: minio cli - create the 'test-bucket' bucket
+  command: mc mb myminio/test-bucket
+  ignore_errors: yes
+
+# Create user accounts
+
+- name: mc - Create new 'testuser' user account
+  command: mc admin user add myminio "{{ S3_OCEANSAFETY_ACCESS_KEY }}" "{{ S3_OCEANSAFETY_SECRET_KEY }}"
+  ignore_errors: yes
+
+# Add access policies to bucket
+
+- name: minio cli - Add 'test-bucket' policy
+  command: mc admin policy add myminio testuser /opt/minio/test-bucket.json
+  ignore_errors: yes
+
+# Add bucket lifecycle policy
+
+- name: mc - Add 'test-bucket' lifecycle config
+  command: mc ilm import myminio/test-bucket < /opt/minio/test-bucket.json
+  ignore_errors: yes
+
+# Map policy to user accounts/buckets
+
+- name: mc - Apply 'test-bucket' policy to the testuser user
+  command: mc admin policy set myminio test-bucket user=testuser
+  ignore_errors: yes

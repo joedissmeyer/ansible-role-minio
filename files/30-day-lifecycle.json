@@ -1,0 +1,14 @@
+{
+    "Rules": [
+        {
+            "Expiration": {
+                "Days": 30
+            },
+            "ID": "Delete data from test-bucket that is 30 days old",
+            "Filter": {
+                "Prefix": "test-bucket/"
+            },
+            "Status": "Enabled"
+        }
+    ]
+}

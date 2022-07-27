@@ -1,0 +1,9 @@
+---
+# handlers file for minio
+
+- name: restart minio
+  service:
+    name: minio
+    state: restarted
+  notify: Check Minio on '{{ minio_connection_type }}'
+  become: True

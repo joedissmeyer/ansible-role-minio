@@ -1,0 +1,49 @@
+---
+
+- name: Download and install Minio RPM server
+  ansible.builtin.yum:
+    name: "{{ minio_package_download }}"
+    state: present
+
+- name: Download and install Minio RPM cli
+  ansible.builtin.yum:
+    name: "{{ minio_client_download }}"
+    state: present
+
+
+- name: Configure firewall ports for Minio S3 API and Minio Console UI
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    immediate: yes
+    state: enabled
+  loop:
+    - "{{ minio_http_port }}/tcp"
+    - "{{ minio_console_port }}/tcp"
+
+- name: Copy minio configuration templates
+  template:
+    src: 'minio.j2'
+    dest: '/etc/default/minio'
+    mode: 0644
+
+- name: Ensure that minio directories are created
+  file:
+    path: '{{ minio_dir }}'
+    state: directory
+    mode: 0750
+    owner: '{{ minio_user }}'
+    group: '{{ minio_group }}'
+  loop:
+    - '{{ minio_home }}'
+    - '{{ minio_home }}/test-bucket'
+    - '{{ minio_data_path }}'
+  loop_control:
+    loop_var: minio_dir
+
+- name: Allow minio console UI to run over HTTPS port (Set cap_net_bind_service=+epi on /opt/minio/bin/minio)
+  community.general.capabilities:
+    path: /opt/minio/bin/minio
+    capability: cap_net_bind_service=+epi
+    state: present
+    when: minio_ssl_enabled == 'true'

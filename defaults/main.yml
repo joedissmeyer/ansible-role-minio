@@ -1,10 +1,9 @@
 ---
 # defaults file for minio
-minio_home: /opt/minio
 minio_server_download_source: https://dl.min.io/server/minio/release/linux-amd64/minio
 minio_client_download_source: https://dl.min.io/client/mc/release/linux-amd64/mc
+minio_home_dir: /opt/minio
 minio_data_path: '{{ minio_home }}/data'
-minio_hostname: '{{ ansible_fqdn }}'
 minio_server_port: 9000
 minio_console_port: 9001
 minio_root_user: minioadmin

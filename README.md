@@ -7,7 +7,7 @@ Deploy a bare-bones, single-node [Minio](https://min.io/) object storage instanc
 ## Requirements
 
 - Ansible >= 2.12 (It might work on previous versions.)
-- Install the role, `ansbile-galaxy install -r joedissmeyer.ansible-role-minio`
+- Install the role, `ansible-galaxy install joedissmeyer.ansible_role_minio`
 
 ## Role Variables
 

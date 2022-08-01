@@ -12,21 +12,21 @@
 
 - name: Create the minio user group
   group:
-    name: {{ minio_user }}
+    name: "{{ minio_root_user }}"
     state: present
 
 - name: Create the minio user account
   user:
-    name: {{ minio_user }}
+    name: "{{ minio_root_user }}"
     state: present
-    group: {{ minio_group }}
+    group: "{{ minio_group }}"
 
 - name: Ensure that minio directories are created
   file:
     path: '{{ minio_dir }}'
     state: directory
     mode: 0750
-    owner: '{{ minio_user }}'
+    owner: '{{ minio_root_user }}'
     group: '{{ minio_group }}'
   loop:
     - '{{ minio_home }}'
@@ -44,7 +44,7 @@
     url: '{{ minio_server_download_source }}'
     dest: '{{ minio_home }}/bin/minio'
     mode: +x
-    owner: '{{ minio_user }}'
+    owner: '{{ minio_root_user }}'
     group: '{{ minio_group }}'
   register: file_downloaded
   retries: 15

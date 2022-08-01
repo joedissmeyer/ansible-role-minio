@@ -1,17 +1,21 @@
 ---
 galaxy_info:
-  role_name: joedissmeyer.ansible-role-minio
+  role_name: ansible-role-minio
   author: Joseph Dissmeyer
   description: Minio single-node deployment role
   company: joe@dissmeyer.com
   license: Apache
-  min_ansible_version: '2.9'
+  min_ansible_version: '2.12'
   platforms:
-    - name: "EL"
-      versions:
-        - "7"
-        - "8"
-        - "9"
+  - name: EL
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  - name: Ubuntu
+    versions:
+    - all
   galaxy_tags:
     - "system"
     - "minio"

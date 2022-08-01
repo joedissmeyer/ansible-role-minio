@@ -9,7 +9,7 @@
   loop:
     - src: minio.conf
       dest: '{{ minio_home }}/minio.conf'
-      user: '{{ minio_root_user }}'
+      user: '{{ minio_user }}'
     - src: minio.service
       dest: /etc/systemd/system/minio.service
       user: root

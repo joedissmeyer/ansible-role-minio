@@ -7,7 +7,7 @@ AssertFileIsExecutable="{{ minio_home }}/bin/minio"
 
 [Service]
 WorkingDirectory={{ minio_home }}
-User={{ minio_root_user }}
+User={{ minio_user }}
 Group={{ minio_group }}
 PermissionsStartOnly=true
 EnvironmentFile=-{{ minio_home }}/minio.conf

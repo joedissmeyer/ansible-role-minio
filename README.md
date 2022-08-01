@@ -1,3 +1,5 @@
+<p><img src="https://cdn.worldvectorlogo.com/logos/minio-1.svg" alt="minio logo" title="minio" align="right" height="60" /></p>
+
 # Ansible Role: Minio
 
 ## Description

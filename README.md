@@ -39,14 +39,14 @@ You can install via Ansible Galaxy or via requirements file.
 To install using Galaxy,
 
 ```shell
-$ ansible-galaxy install -r joedissmeyer.ansible-role-minio
+$ ansible-galaxy install joedissmeyer.ansible_role_minio
 ```
 
 Or using a requirements file:
 
 ```
 roles:
-- name: joedissmeyer.ansible-role-minio
+- name: joedissmeyer.ansible_role_minio
   src: https://github.com/joedissmeyer/ansible-role-minio.git
 ```
 
@@ -59,7 +59,7 @@ It would be wise to change the minio root user account and password using Ansibl
   gather_facts: yes
   hosts: minio
   roles:
-    - joedissmeyer.ansible-role-minio
+    - joedissmeyer.ansible_role_minio
   vars:
     minio_root_user: minioadmin
     minio_root_password: minioadmin

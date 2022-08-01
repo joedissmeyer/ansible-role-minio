@@ -21,7 +21,7 @@
   gather_facts: yes
   hosts: minio
   roles:
-    - joedissmeyer.ansible-role-minio
+    - joedissmeyer.ansible_role_minio
   vars:
     minio_root_user: minioadmin
     minio_root_password: minioadmin

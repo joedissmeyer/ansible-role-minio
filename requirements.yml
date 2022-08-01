@@ -1,4 +1,4 @@
 ---
 roles:
-- name: joedissmeyer.ansible-role-minio
+- name: joedissmeyer.ansible_role_minio
   src: https://github.com/joedissmeyer/ansible-role-minio.git

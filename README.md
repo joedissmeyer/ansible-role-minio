@@ -23,7 +23,7 @@ Several variables reference the official configuration items needed by Minio ser
 | Name           | Default Value | Description                        |
 | -------------- | ------------- | -----------------------------------|
 | `minio_home` | /opt/minio | Home directory for the minio binaries and configuration files. |
-| `minio_server_download_source` | "https://dl.min.io/server/minio/release/linux-amd64/minio" | Prometheus installation tasks gets skipped when set to true. |
+| `minio_server_download_source` | "https://dl.min.io/server/minio/release/linux-amd64/minio" | Download source of the Minio server binary. |
 | `minio_client_download_source` | "https://dl.min.io/client/mc/release/linux-amd64/mc" | Download source of the Minio CLI client. |
 | `minio_data_path` | '{{ minio_home }}/data' | Path to directory where Minio will store buckets and object data. Translates to the `MINIO_VOLUMES` configuration variable in the Minio config file. Currently is _static_ to a single item. |
 | `minio_server_port`| "9000" | The TCP port that Minio server will bind to for the Object storage (S3) API. |

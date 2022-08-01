@@ -2,6 +2,9 @@
 
 # Ansible Role: Minio
 
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Ansible Role](https://img.shields.io/badge/ansible%20role-joedissmeyer.ansible_role_minio-blue.svg)](https://galaxy.ansible.com/joedissmeyer/ansible_role_minio)
+
 ## Description
 
 Deploy a bare-bones, single-node [Minio](https://min.io/) object storage instance using ansible. The purpose of this role is to quickly and efficiently install Minio on a single virtual machine. Minimal variables are used to achieve this goal.

@@ -1,6 +1,5 @@
 ---
 galaxy_info:
-  role_name: ansible-role-minio
   author: Joseph Dissmeyer
   description: Minio single-node deployment role
   company: joe@dissmeyer.com

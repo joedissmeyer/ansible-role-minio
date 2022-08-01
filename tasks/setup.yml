@@ -1,44 +1,17 @@
 ---
-- name: Copy config files for setting up minio lifecycle policies
-  copy:
-    src: "{{ item }}"
-    dest: /opt/minio
-    owner: root
-    group: root
-    mode: '0775'
+- name: Copy minio templates
+  template:
+    src: '{{ conf_item.src }}.j2'
+    dest: '{{ conf_item.dest }}'
+    backup: True
+    mode: 0644
+    owner: '{{ conf_item.user }}'
   loop:
-    - test-bucket.json
-
-- name: minio cli - add local minio server to current terminal session
-  command: mcli config host add myminio http://{{ ansible_default_ipv4.address }}:9000 "{{ minio_root_user }}" "{{ minio_root_password }}"
-  ignore_errors: yes
-
-# Create buckets
-
-- name: minio cli - create the 'test-bucket' bucket
-  command: mcli mb myminio/test-bucket
-  ignore_errors: yes
-
-# Create user accounts
-
-- name: mc - Create new 'testuser' user account
-  command: mcli admin user add myminio test-user Password1
-  ignore_errors: yes
-
-# Add access policies to bucket
-
-- name: minio cli - Add 'test-bucket' policy
-  command: mcli admin policy add myminio testuser /opt/minio/test-bucket.json
-  ignore_errors: yes
-
-# Add bucket lifecycle policy
-
-- name: mc - Add 'test-bucket' lifecycle config
-  command: mcli ilm import myminio/test-bucket < /opt/minio/test-bucket.json
-  ignore_errors: yes
-
-# Map policy to user accounts/buckets
-
-- name: mc - Apply 'test-bucket' policy to the testuser user
-  command: mcli admin policy set myminio test-bucket user=testuser
-  ignore_errors: yes
+    - src: minio.conf
+      dest: '{{ minio_home }}/minio.conf'
+      user: '{{ minio_user }}'
+    - src: minio.service
+      dest: /etc/systemd/system/minio.service
+      user: root
+  loop_control:
+    loop_var: conf_item

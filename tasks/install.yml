@@ -1,16 +1,5 @@
 ---
 
-- name: Download and install Minio RPM server
-  ansible.builtin.yum:
-    name: "{{ minio_package_download }}"
-    state: present
-
-- name: Download and install Minio RPM cli
-  ansible.builtin.yum:
-    name: "{{ minio_client_download }}"
-    state: present
-
-
 - name: Configure firewall ports for Minio S3 API and Minio Console UI
   firewalld:
     port: "{{ item }}"
@@ -21,22 +10,16 @@
     - "{{ minio_server_port }}/tcp"
     - "{{ minio_console_port }}/tcp"
 
-- name: Copy minio configuration templates
-  template:
-    src: 'minio.j2'
-    dest: '/etc/default/minio'
-    mode: 0644
-
-- name: Create the minio group
+- name: Create the minio user group
   group:
-    name: minio-user
+    name: {{ minio_user }}
     state: present
 
-- name: Create the minio user
+- name: Create the minio user account
   user:
-    name: minio-user
+    name: {{ minio_user }}
     state: present
-    group: minio-user
+    group: {{ minio_group }}
 
 - name: Ensure that minio directories are created
   file:
@@ -47,7 +30,35 @@
     group: '{{ minio_group }}'
   loop:
     - '{{ minio_home }}'
-    - '{{ minio_home }}/test-bucket'
+    - '{{ minio_home }}/bin'
     - '{{ minio_data_path }}'
+    - '{{ minio_home }}/.minio'
+    - '{{ minio_home }}/.minio/certs'
+    - '{{ minio_data_path }}/.minio.sys'
+    - '{{ minio_data_path }}/.minio.sys/config'
   loop_control:
     loop_var: minio_dir
+
+- name: download and install minio server binary
+  get_url:
+    url: '{{ minio_server_download_source }}'
+    dest: '{{ minio_home }}/bin/minio'
+    mode: +x
+    owner: '{{ minio_user }}'
+    group: '{{ minio_group }}'
+  register: file_downloaded
+  retries: 15
+  delay: 5
+  until: file_downloaded is succeeded
+
+- name: download and install minio client (mc)
+  get_url:
+    url: '{{ minio_client_download_source }}'
+    dest: /usr/sbin/mc
+    mode: +x
+    owner: root
+    group: root
+  register: file_downloaded
+  retries: 15
+  delay: 5
+  until: file_downloaded is succeeded

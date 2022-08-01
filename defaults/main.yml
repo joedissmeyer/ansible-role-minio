@@ -3,17 +3,13 @@
 minio_home: /opt/minio
 minio_user: minio-user
 minio_group: minio-user
-minio_package_source: https://dl.min.io/server/minio/release/linux-amd64
-minio_package_version: "minio-20220726005303.0.0.x86_64.rpm"
-minio_package_download: "https://dl.min.io/server/minio/release/linux-amd64/{{ minio_package_version }}"
-minio_client_source: https://dl.min.io/client/mc/release/linux-amd64
-minio_client_version: "mcli-20220724022513.0.0.x86_64.rpm"
-minio_client_download: "https://dl.min.io/client/mc/release/linux-amd64/{{ minio_client_version }}"
+minio_server_download_source: https://dl.min.io/server/minio/release/linux-amd64/minio
+minio_client_download_source: https://dl.min.io/client/mc/release/linux-amd64/mc
 minio_data_path: '{{ minio_home }}/data'
 minio_hostname: '{{ ansible_fqdn }}'
 minio_server_port: 9000
 minio_console_port: 9001
-minio_root_user: minio
-minio_root_password: minio
+minio_root_user: minioadmin
+minio_root_password: minioadmin
 minio_ssl_enabled: false
 minio_prometheus_auth_type: public

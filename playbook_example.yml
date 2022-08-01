@@ -13,8 +13,8 @@
 #
 # NOTES:
 #
-# Tested against Fedora Server 36.
-# 
+#  - Tested against Fedora Server 36.
+#  - The Minio root password _MUST_ be 8 characters or longer.
 
 - name: Install Minio storage server
   become: yes
@@ -23,7 +23,7 @@
   roles:
     - joedissmeyer.ansible-role-minio
   vars:
-    minio_root_user: minio
-    minio_root_password: minio
-    minio_package_version: "minio-20220726005303.0.0.x86_64.rpm"
-    minio_client_version: "mcli-20220724022513.0.0.x86_64.rpm"
+    minio_root_user: minioadmin
+    minio_root_password: minioadmin
+    minio_server_download_source: "https://dl.min.io/server/minio/release/linux-amd64/minio"
+    minio_client_download_source: "https://dl.min.io/client/mc/release/linux-amd64/mc"

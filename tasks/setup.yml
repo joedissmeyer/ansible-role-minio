@@ -8,7 +8,7 @@
     owner: '{{ conf_item.user }}'
   loop:
     - src: minio.conf
-      dest: '{{ minio_home }}/minio.conf'
+      dest: '{{ minio_home_dir }}/minio.conf'
       user: '{{ minio_user }}'
     - src: minio.service
       dest: /etc/systemd/system/minio.service
